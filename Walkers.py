@@ -14,16 +14,15 @@ while True:
     ret, frame = cap.read()
 
     # Converta cada quadro em escala de cinza
-    gray = cv2.cvtColor(body_classifier, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     # Passe o quadro para nosso classificador de corpos
     bodies = body_classifier.detectMultiScale(gray,1.2,3)
     
     # Extraia as caixas delimitadoras para quaisquer corpos identificados
     for (x,y,w,h) in bodies:
-       cv2.rectangle(body_classifier,(x,y),(x+w,y+h),(255,0,0),2)
+       cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
              
-       roi_color = body_classifier[y:y+h, x:x+w] 
-       cv2.imwrite("face.jpg",roi_color)
+       cv2.imshow("face.jpg",frame)
 
     if cv2.waitKey(1) == 32: #32 é a barra de espaço
         break
